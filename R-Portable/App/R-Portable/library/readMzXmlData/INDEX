@@ -1,0 +1,4 @@
+readMzXmlData-package   The readMzXmlData Package
+readMzXmlDir            Reads recursively mass spectrometry data in
+                        mzXML format.
+readMzXmlFile           Reads mass spectrometry data in mzXML format.

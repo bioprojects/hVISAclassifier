@@ -1,0 +1,25 @@
+MALDIquantForeign-package
+                        Import/Export routines for MALDIquant
+MALDIquantForeign-parallel
+                        Parallel Support in Package 'MALDIquantForeign'
+export,AbstractMassObject-method
+                        Export files
+exportImzMl,MassSpectrum-method
+                        Export to imzML files
+exportMsd,MassSpectrum-method
+                        Export to MSD files
+exportMzMl,MassSpectrum-method
+                        Export to mzML files
+exportTab,AbstractMassObject-method
+                        Export to text files
+import                  Import files
+importAnalyze           Import Analyze 7.5 files
+importBrukerFlex        Import Bruker Daltonics *flex files
+importCdf               Import CDF files
+importCiphergenXml      Import Ciphergen XML files
+importImzMl             Import imzML files
+importMsd               Import MSD files
+importMzMl              Import mzML files
+importMzXml             Import mzXML files
+importTxt               Import text files
+supportedFileFormats    Supported file formats

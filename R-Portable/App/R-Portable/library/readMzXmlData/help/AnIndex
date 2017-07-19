@@ -1,0 +1,16 @@
+readMzXmlData-package	readMzXmlData-package
+.attributeTimeToDouble	attributeTimeToDouble
+.attributeToDouble	attributeToDouble
+.attributeToString	attributeToString
+.base64decode	base64-decode
+.grepDouble	grepNumeric
+.grepNumber	grepNumeric
+.grepSubString	grepSubString
+.mzXmlHandlers	mzXmlHandlers
+.parseMzXml	parseMzXml
+.readMzXmlFile	readMzXmlFile-internal
+.revfregexpr	revfregexpr
+mqReadMzXml	readMzXmlData-defunct
+readMzXmlData-defunct	readMzXmlData-defunct
+readMzXmlDir	readMzXmlDir
+readMzXmlFile	readMzXmlFile

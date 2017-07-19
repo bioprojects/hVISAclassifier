@@ -1,0 +1,16 @@
+readBrukerFlexData-package	readBrukerFlexData-package
+.changePrecision	changePrecision
+.double2singlePrecision	double2singlePrecision
+.extractHPCConstants	extractHPCConstants
+.grepAcquDoubleValue	grepAcquDoubleValue
+.grepAcquValue	grepAcquValue
+.hpc	hpc
+.readAcquFile	readAcquFile
+.readFidFile	readFidFile
+.sampleName	sampleName
+.tof2mass	tof2mass
+cpSpecHpcMzXml	cpSpecHpcMzXml
+mqReadBrukerFlex	readBrukerFlexData-defunct
+readBrukerFlexData-defunct	readBrukerFlexData-defunct
+readBrukerFlexDir	readBrukerFlexDir
+readBrukerFlexFile	readBrukerFlexFile

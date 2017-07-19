@@ -1,0 +1,14 @@
+plot.varSelRF           Plot a varSelRF object
+plot.varSelRFBoot       plot a varSelRFBoot object
+randomVarImpsRF         Variable importances from random forest on
+                        permuted class labels
+randomVarImpsRFplot     Plot random random variable importances
+selProbPlot             Selection probability plot for variable
+                        importance from random forests
+summary.varSelRFBoot    Summary of a varSelRFBoot object
+varSelImpSpecRF         Variable selection using the "importance
+                        spectrum"
+varSelRF                Variable selection from random forests using
+                        OOB error
+varSelRFBoot            Bootstrap the variable selection procedure in
+                        varSelRF
