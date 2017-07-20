@@ -22,7 +22,7 @@ When it finishes running, an output CSV file will be created.  Its name and path
 
 ![Alt text](http://yahara.hustle.ne.jp/projects/lftp_tmp/hVISAclassifier_main_window4.png "hVISAclassifier_main_window4")
 
-Please push "Display CSV" button.  Prediction will be displayed for each sample as below.
+Please push "Display CSV" button.  Prediction for each sample will be displayed as below.
 
 ![Alt text](http://yahara.hustle.ne.jp/projects/lftp_tmp/hVISAclassifier_main_window5.png "hVISAclassifier_main_window5")
 
