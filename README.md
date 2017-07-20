@@ -2,7 +2,7 @@
 
 This is a graphical program that enables classification between hVISA and vancomycin-susceptible S. aureus using MALDI-TOF MS data.  
 
-Please download it by pushing "Clone or download" -> "Download ZIP" in this GitHub homepage.
+Please download it by pushing "Clone or download" -> "Download ZIP" at the right in this GitHub homepage.
 
 After downloading and unzipping in your C drive, please double-click "run.vbs".  The following window will appear in your web-browser.  
 
