@@ -11,6 +11,6 @@ According to the texts in the windows, please specify
 
 2) path to a .RData database file of spectra data (e.g., "C:\hVISAclassifier\spectraDB.RData" to specify "spectraDB.RData" file included in the package). 
 
-![Alt text](http://yahara.hustle.ne.jp/projects/lftp_tmp/hVISAclassifier_main_window.png "hVISAclassifier_main_window")
+![Alt text](http://yahara.hustle.ne.jp/projects/lftp_tmp/hVISAclassifier_main_window1.png "hVISAclassifier_main_window")
 
 Push the "Analyze" button.  
