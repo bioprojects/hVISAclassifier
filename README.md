@@ -1,6 +1,6 @@
 # hVISAclassifier
 
-This is a graphical program that enables classification between hVISA, VISA, and vancomycin-susceptible S. aureus using MALDI-TOF MS data.  
+This is a graphical program that enables classification between hVISA (defined by BHI-agar), VISA, and vancomycin-susceptible S. aureus using MALDI-TOF MS data.  
 
 Please download it by pushing "Clone or download" -> "Download ZIP" at the right in this GitHub homepage.
 
