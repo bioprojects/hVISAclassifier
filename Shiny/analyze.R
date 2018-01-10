@@ -6,7 +6,7 @@ doAnalyze <- function(prediction_dir, spectraRDataDB_File, spectraRawDB_dir, cro
   # definition
   ##############################################################################
 
-  flag_plot_discriminatory_peaks <- F
+#  flag_plot_discriminatory_peaks <- F
 
   ##
   ## directory containing data you would like to classify
@@ -34,10 +34,12 @@ doAnalyze <- function(prediction_dir, spectraRDataDB_File, spectraRawDB_dir, cro
   ##################################
 
   ##
-  ## specify two classes
+  ## specify classes
   ## that must be included in file or directory name of each sample
   ##
-  c_class   <- c("VSSA", "hVISA") 
+  ## pattern matching on each file name will be conducted in this order
+  ##
+  c_class   <- c("VSSA", "hVISA", "VISA") 
 
   ##############################################################################
   # library and options
@@ -67,6 +69,7 @@ doAnalyze <- function(prediction_dir, spectraRDataDB_File, spectraRawDB_dir, cro
   ############################
   # database for training
   ############################
+  spectraD0 <- list()
   if (file.exists(spectraRDataDB_File)) {
     load(spectraRDataDB_File)
   } else if (dir.exists(spectraRawDB_dir)) {
@@ -117,19 +120,41 @@ doAnalyze <- function(prediction_dir, spectraRDataDB_File, spectraRawDB_dir, cro
     #top10 <- intensity(peaks[[i]]) %in% sort(intensity(peaks[[i]]), decreasing=TRUE)[1:10]
     #labelPeaks(peaks[[i]], index=top10)
     
+    # --------------------------------------------
+    # set eachSampleClass for this individual i
+    # --------------------------------------------
+    
     eachSampleFName <- spectra[[i]]@metaData$file
     eachSampleClass <- ""
-    for (j in 1:length(c_class)) {
-      if (length(grep(c_class[j], eachSampleFName)) == 1) {
-        if (eachSampleClass == "") {
-          eachSampleClass <- c_class[j]
-        } else {
-          stop(
-            sprintf("Error: both phentoypes are found in your file path %s", eachSampleFName)
-          )
-        }
-      } 
-    }
+    
+    # VSSA?
+    if (length(grep(c_class[1], eachSampleFName)) == 1) {
+      if (eachSampleClass == "") {
+        eachSampleClass <- c_class[1]
+      } else {
+        stop(
+          sprintf("Error: both phentoypes are found in your file path %s", eachSampleFName)
+        )
+      }
+    # hVISA?
+    } else if (length(grep(c_class[2], eachSampleFName)) == 1) {
+      if (eachSampleClass == "") {
+        eachSampleClass <- c_class[2]
+      } else {
+        stop(
+          sprintf("Error: both phentoypes are found in your file path %s", eachSampleFName)
+        )
+      }
+    # VISA?
+    } else if (length(grep(c_class[3], eachSampleFName)) == 1) {
+      if (eachSampleClass == "") {
+        eachSampleClass <- c_class[3]
+      } else {
+        stop(
+          sprintf("Error: both phentoypes are found in your file path %s", eachSampleFName)
+        )
+      }
+    } 
     
     if (eachSampleClass == "") {
       print(sprintf("Error: eachSampleClass is empty for i=%s, name=%s", i, eachSampleFName))
@@ -186,28 +211,29 @@ doAnalyze <- function(prediction_dir, spectraRDataDB_File, spectraRawDB_dir, cro
 
   df_selectedVars     <- data.frame(feature2Matrix[,which(colnames(feature2Matrix) %in% rf.vs1$selected.vars)])
   dim(df_selectedVars)
+  #write.table(df_selectedVars, file="C://df_selectedVars.txt", sep="\t")
 
-  if (flag_plot_discriminatory_peaks) {
-    #
-    # confirm statistically significant differences in the peaks
-    # between the two groups
-    #
-    for (j in 1:ncol(df_selectedVars)) {
-      print(
-        wilcox.test(
-          df_selectedVars[cl_D0==c_class[1], j]
-          ,df_selectedVars[cl_D0==c_class[2], j]
-        )
-      )
-      boxplot(
-        df_selectedVars[cl_D0==c_class[1],  j]
-        , df_selectedVars[cl_D0==c_class[2],  j]
-        , ylim=c(0, 50)
-        , xlab=c("VSSA", "hVISA")
-        , main=names(df_selectedVars)[j]
-      )
-    }
-  }
+#  if (flag_plot_discriminatory_peaks) {
+#    #
+#    # confirm statistically significant differences in the peaks
+#    # between the two groups
+#    #
+#    for (j in 1:ncol(df_selectedVars)) {
+#      print(
+#        wilcox.test(
+#          df_selectedVars[cl_D0==c_class[1], j]
+#          ,df_selectedVars[cl_D0==c_class[2], j]
+#        )
+#      )
+#      boxplot(
+#        df_selectedVars[cl_D0==c_class[1],  j]
+#        , df_selectedVars[cl_D0==c_class[2],  j]
+#        , ylim=c(0, 50)
+#        , xlab=c("VSSA", "hVISA")
+#        , main=names(df_selectedVars)[j]
+#      )
+#    }
+#  }
 
   #################################################
   # validation
