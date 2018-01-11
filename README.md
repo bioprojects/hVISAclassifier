@@ -26,6 +26,5 @@ Please push "Display CSV" button.  Prediction for each sample will be displayed 
 
 ![Alt text](http://yahara.hustle.ne.jp/projects/lftp_tmp/hVISAclassifier_main_window5.png "hVISAclassifier_main_window5")
 
-Alternatively, 
-2)' you can specify a path to a directory of raw spectra data to conduct learning and create .RData database file by yourself using your reference dataset.
+Alternatively, you can specify a path to a directory of raw spectra data to conduct learning and create .RData database file by yourself using your reference dataset.
 In that case, .RData file will be created in the same folder as that of the raw spectra data you specified.
