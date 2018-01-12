@@ -45,7 +45,7 @@ doAnalyze <- function(prediction_dir, spectraRDataDB_File, spectraRawDB_dir, cro
   # library and options
   ##############################################################################
 
-  #options(max.print=99999)
+  #options(max.print=111)
 
   library(MALDIquant)
   library(MALDIquantForeign)
@@ -101,14 +101,14 @@ doAnalyze <- function(prediction_dir, spectraRDataDB_File, spectraRawDB_dir, cro
   }
   
   ## transform intensities
-  spectra <- transformIntensity(spectraDcat, method="sqrt")
+  spectraDcatForPeakCalling <- transformIntensity(spectraDcat, method="sqrt")
   ## smooth spectra
-  spectra <- smoothIntensity(spectra, method="MovingAverage")
+  spectraDcatForPeakCalling <- smoothIntensity(spectraDcatForPeakCalling, method="MovingAverage")
   ## baseline correction
-  spectra <- removeBaseline(spectra)
+  spectraDcatForPeakCalling <- removeBaseline(spectraDcatForPeakCalling)
   
   ## detect peaks
-  peaks <- detectPeaks(spectra)
+  peaks <- detectPeaks(spectraDcatForPeakCalling)
   
   #featureMatrixBeforeWarp <- intensityMatrix(peaks)
   
@@ -125,37 +125,45 @@ doAnalyze <- function(prediction_dir, spectraRDataDB_File, spectraRawDB_dir, cro
     # set eachSampleClass for this individual i
     # --------------------------------------------
     
-    eachSampleFName <- spectra[[i]]@metaData$file
+    eachSampleFName <- spectraD0[[i]]@metaData$file
     eachSampleClass <- ""
     
-    # VSSA?
-    if (length(grep(c_class[1], eachSampleFName)) == 1) {
-      if (eachSampleClass == "") {
-        eachSampleClass <- c_class[1]
-      } else {
-        stop(
-          sprintf("Error: both phentoypes are found in your file path %s", eachSampleFName)
-        )
+    arr_parts_sampleFName <- unlist(strsplit(eachSampleFName,"\\\\|/"))
+    
+    for (i in (length(arr_parts_sampleFName)-4):1) {
+      # VSSA?
+      if (length(grep(c_class[1], arr_parts_sampleFName[i])) == 1) {
+        if (eachSampleClass == "") {
+          eachSampleClass <- c_class[1]
+        } else {
+          stop(
+            sprintf("Error: both phentoypes are found in your file path %s", eachSampleFName)
+          )
+        }
+      # hVISA?
+      } else if (length(grep(c_class[2], arr_parts_sampleFName[i])) == 1) {
+        if (eachSampleClass == "") {
+          eachSampleClass <- c_class[2]
+        } else {
+          stop(
+            sprintf("Error: both phentoypes are found in your file path %s", eachSampleFName)
+          )
+        }
+      # VISA?
+      } else if (length(grep(c_class[3], arr_parts_sampleFName[i])) == 1) {
+        if (eachSampleClass == "") {
+          eachSampleClass <- c_class[3]
+        } else {
+          stop(
+            sprintf("Error: both phentoypes are found in your file path %s", eachSampleFName)
+          )
+        }
       }
-    # hVISA?
-    } else if (length(grep(c_class[2], eachSampleFName)) == 1) {
-      if (eachSampleClass == "") {
-        eachSampleClass <- c_class[2]
-      } else {
-        stop(
-          sprintf("Error: both phentoypes are found in your file path %s", eachSampleFName)
-        )
+      
+      if ( sum(c_class %in% eachSampleClass) == 1 ) {
+        break
       }
-    # VISA?
-    } else if (length(grep(c_class[3], eachSampleFName)) == 1) {
-      if (eachSampleClass == "") {
-        eachSampleClass <- c_class[3]
-      } else {
-        stop(
-          sprintf("Error: both phentoypes are found in your file path %s", eachSampleFName)
-        )
-      }
-    } 
+    }
     
     if (eachSampleClass == "") {
       print(sprintf("Error: eachSampleClass is empty for i=%s, name=%s", i, eachSampleFName))
@@ -207,6 +215,7 @@ doAnalyze <- function(prediction_dir, spectraRDataDB_File, spectraRawDB_dir, cro
   # feature selection
   ##################################
   
+  set.seed(111)
   rf.vs1 <- varSelRF(feature2Matrix, cl_D0, vars.drop.frac = 0.18) # reducing the value improves discrimination (but 0.15 takes much longer time)
   rf.vs1
 
@@ -245,7 +254,8 @@ doAnalyze <- function(prediction_dir, spectraRDataDB_File, spectraRawDB_dir, cro
   #####################################  
   if (length(spectraD1) > 0) {
   
-    rf.classify <- randomForest(cl_D0 ~ ., data=df_selectedVars, importance=TRUE, proximity=TRUE)
+    set.seed(111)
+    rf.classify <- randomForest(cl_D0 ~ ., data=df_selectedVars, seed=111)
     
     testDf     <- data.frame(testMatrix[,which(colnames(testMatrix) %in% rf.vs1$selected.vars)])
     c_predicted <- predict(rf.classify, newdata = testDf)
@@ -273,10 +283,10 @@ doAnalyze <- function(prediction_dir, spectraRDataDB_File, spectraRawDB_dir, cro
   } 
 
   #####################################
-  # cross validatoin
+  # cross validation
   #####################################  
   if (flag_cross_validation) {
-    
+        
     c_predicted <- c()
     list_leaveOneOut <- list()
     for (i in 1:nrow(feature2Matrix)) {
@@ -289,9 +299,11 @@ doAnalyze <- function(prediction_dir, spectraRDataDB_File, spectraRawDB_dir, cro
       
       dim(df_leaveOneOut_selectedVars) 
       #print(df_leaveOneOut_selectedVars)
-      
+
+      set.seed(111)
+
       # training by using the selected peaks
-      rf.leaveOneOut.classify <- randomForest(cl_leaveOneOut ~ ., data=df_leaveOneOut_selectedVars, importance=TRUE, proximity=TRUE)
+      rf.leaveOneOut.classify <- randomForest(cl_leaveOneOut ~ ., data=df_leaveOneOut_selectedVars, seed=111)
       print(rf.leaveOneOut.classify)
       list_leaveOneOut[[i]] <- rf.leaveOneOut.classify
       
@@ -309,11 +321,16 @@ doAnalyze <- function(prediction_dir, spectraRDataDB_File, spectraRawDB_dir, cro
     df_leaveOneOut_table <- data.frame(truth=cl_D0, prediction=c_predicted, sample=c_sampleFNames)
     df_leaveOneOut_table$correct <- ifelse(df_leaveOneOut_table$truth == df_leaveOneOut_table$prediction, 1, 0)
     df_leaveOneOut_table[df_leaveOneOut_table[,1]!=df_leaveOneOut_table[,2], ]
+
+    if (file.exists(spectraRDataDB_File)) {
+      DBstr <-  strsplit(spectraRDataDB_File, "\\\\|/")[[1]]
+    } else if (dir.exists(spectraRawDB_dir)) {
+      DBstr <- strsplit(spectraRawDB_dir, "\\\\|/")[[1]]
+    }
+    DBstr <- rev(DBstr)[1]
+    DBstr <- sub(".RData", "", DBstr)
     
-    separateDatabaseDir <- strsplit(spectraRawDB_dir, "\\\\|/")[[1]]
-    separateDatabaseDir <- rev(separateDatabaseDir)[1]
-    
-    outCsvFileName <- sprintf("crossValidation_%s_out.csv", separateDatabaseDir)
+    outCsvFileName <- sprintf("crossValidation_%s_out.csv", DBstr)
     
     write.csv(
       df_leaveOneOut_table
