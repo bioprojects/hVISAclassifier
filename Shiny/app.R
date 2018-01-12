@@ -66,7 +66,7 @@ ui <- shinyUI(
   fluidPage(
     tags$head(tags$script(script)),
 
-    titlePanel("hVISA Classifier"),
+    titlePanel("hVISA Classifier v1.0"),
 
     sidebarLayout(
       sidebarPanel(
