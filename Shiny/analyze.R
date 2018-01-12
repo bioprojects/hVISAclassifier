@@ -75,14 +75,15 @@ doAnalyze <- function(prediction_dir, spectraRDataDB_File, spectraRawDB_dir, cro
   } else if (dir.exists(spectraRawDB_dir)) {
     spectraD0 <- importBrukerFlex(spectraRawDB_dir, verbose=FALSE)
 
-    separateDatabaseDir <- strsplit(spectraRawDB_dir, "\\\\|/")[[1]]
-    separateDatabaseDir <- rev(separateDatabaseDir)[1]
+    #separateDatabaseDir <- strsplit(spectraRawDB_dir, "\\\\|/")[[1]]
+    #separateDatabaseDir <- rev(separateDatabaseDir)[1]
     save(
-      spectraD0, file=sprintf("hVISAclassifier_spectra_%s.RData",separateDatabaseDir)
+      #spectraD0, file=sprintf("hVISAclassifier_spectra_%s.RData",separateDatabaseDir)
+      spectraD0, file=sprintf("%s.RData",spectraRawDB_dir)
     )
 
   } else {
-    stop("Please specify either spectraRDataDB_File or database_dir")
+    stop("Please specify either a path to a .RData file of spectra data or that to a directory of raw spectra data")
   }
   
   # -------------------------------
@@ -259,7 +260,7 @@ doAnalyze <- function(prediction_dir, spectraRDataDB_File, spectraRawDB_dir, cro
     separatePredictionDir <- strsplit(prediction_dir, "\\\\|/")[[1]]
     separatePredictionDir <- rev(separatePredictionDir)[1]
     
-    outCsvFileName <- sprintf("hVISAclassifier_predicted_%s_out.csv", separatePredictionDir)
+    outCsvFileName <- sprintf("prediction_of_%s_out.csv", separatePredictionDir)
     
     write.csv(
       df_testPredicted
@@ -312,7 +313,7 @@ doAnalyze <- function(prediction_dir, spectraRDataDB_File, spectraRawDB_dir, cro
     separateDatabaseDir <- strsplit(spectraRawDB_dir, "\\\\|/")[[1]]
     separateDatabaseDir <- rev(separateDatabaseDir)[1]
     
-    outCsvFileName <- sprintf("hVISAclassifier_crossValidation_%s_out.csv", separateDatabaseDir)
+    outCsvFileName <- sprintf("crossValidation_%s_out.csv", separateDatabaseDir)
     
     write.csv(
       df_leaveOneOut_table
