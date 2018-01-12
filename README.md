@@ -2,7 +2,7 @@
 
 This is a graphical program that enables classification between hVISA (defined by BHI-agar), VISA, and vancomycin-susceptible S. aureus using MALDI-TOF MS data.  
 
-Please download it by pushing "Clone or download" -> (Clone with HTTPS) "Download ZIP" at the right in this GitHub homepage.
+Please download it by pushing "Clone or download" -> "Download ZIP" at the right in this GitHub homepage.
 
 After downloading and unzipping in your C drive, please double-click "run.vbs".  The following window will appear in your web-browser.  
 
@@ -16,7 +16,7 @@ According to the texts in the window, please specify
 Push the "Analyze" button.  The program will be running as below.
 
 
-![Alt text](http://yahara.hustle.ne.jp/projects/hVISAclassifier/hVISAclassifier_main_window3.png "hVISAclassifier_main_window3")
+![Alt text](http://yahara.hustle.ne.jp/projects/hVISAclassifier/hVISAclassifier_main_window2.png "hVISAclassifier_main_window3")
 
 When it finishes running, an output CSV file will be created.  Its name and path will be automatically displayed in the window.
 
