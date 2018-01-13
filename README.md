@@ -2,9 +2,11 @@
 
 This is a graphical program that enables classification between hVISA (defined by BHI-agar), VISA, and vancomycin-susceptible S. aureus using MALDI-TOF MS data.  
 
-Please download it by pushing "Clone or download" -> "Download ZIP" at the right in this GitHub homepage.
+Please download it by pushing "Clone or download" -> "Download ZIP" at the right in this GitHub homepage.  The zip file is approximately 131MB.
 
-After downloading and unzipping in your C drive, please double-click "run.vbs".  The following window will appear in your web-browser.  
+![Alt text](http://yahara.hustle.ne.jp/projects/hVISAclassifier/download_zip.png "main_window1")
+
+After downloading and unzipping it in your C drive, please double-click "run.vbs".  The following window will appear in your web-browser.  
 
 According to the texts in the window, please specify 
 1) path to a folder of MALDI-TOF MS data of each sample to be classified (e.g, "C:\hVISAclassifier\example_data" to specify "example_data" folder included in the package)
