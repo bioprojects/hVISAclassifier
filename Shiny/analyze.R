@@ -185,7 +185,6 @@ doAnalyze <- function(prediction_dir, spectraRDataDB_File, spectraRawDB_dir, cro
   
   #
   # create feature2Matrix from featureMatrix
-  #   VSSA vs hVISA
   #
   feature2Matrix <- featureMatrix[,]
   for (i in 1:nrow(feature2Matrix)) {
@@ -221,7 +220,15 @@ doAnalyze <- function(prediction_dir, spectraRDataDB_File, spectraRawDB_dir, cro
 
   df_selectedVars     <- data.frame(feature2Matrix[,which(colnames(feature2Matrix) %in% rf.vs1$selected.vars)])
   dim(df_selectedVars)
-  #write.table(df_selectedVars, file="C://df_selectedVars.txt", sep="\t")
+#  write.table(df_selectedVars, file="C://df_selectedVars.txt", sep="\t")
+#
+#  df_feature2Matrix <- data.frame(feature2Matrix)
+#  df_feature2Matrix$cl_D0 <- cl_D0
+#  write.table(df_feature2Matrix, file="C://df_feature2Matrix.txt", sep="\t")
+#  write.table(data.frame(apply(df_feature2Matrix[cl_D0==c_class[1], -ncol(df_feature2Matrix)], 2, mean, na.rm=T)), file="C://df_average_spectra_class1_VSSA.txt",  sep="\t")
+#  write.table(data.frame(apply(df_feature2Matrix[cl_D0==c_class[2], -ncol(df_feature2Matrix)], 2, mean, na.rm=T)), file="C://df_average_spectra_class2_hVISA.txt", sep="\t")
+#  write.table(data.frame(apply(df_feature2Matrix[cl_D0==c_class[3], -ncol(df_feature2Matrix)], 2, mean, na.rm=T)), file="C://df_average_spectra_class3_VISA.txt",  sep="\t")
+
 
 #  if (flag_plot_discriminatory_peaks) {
 #    #
