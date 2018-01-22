@@ -16,7 +16,7 @@ According to the texts in the window, please specify
 Push the "Analyze" button.  The program will be running as below.
 
 
-![Alt text](http://yahara.hustle.ne.jp/projects/hVISAclassifier/hVISAclassifier_main_window3.png "hVISAclassifier_main_window3")
+![Alt text](http://yahara.hustle.ne.jp/projects/hVISAclassifier/hVISAclassifier_main_window2.png "hVISAclassifier_main_window3")
 
 When it finishes running, an output CSV file will be created.  Its name and path will be automatically displayed in the window.
 
