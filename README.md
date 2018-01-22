@@ -11,12 +11,12 @@ According to the texts in the window, please specify
 
 2) path to a .RData database file of spectra data (e.g., "C:\hVISAclassifier\spectraDB.RData" to specify "spectraDB.RData" file included in the package). 
 
-![Alt text](http://yahara.hustle.ne.jp/projects/hVISAclassifier/main_window1.png "hVISAclassifier_main_window1")
+![Alt text](http://yahara.hustle.ne.jp/projects/hVISAclassifier/main_window1_1.png "hVISAclassifier_main_window1_1")
 
 Push the "Analyze" button.  The program will be running as below.
 
 
-![Alt text](http://yahara.hustle.ne.jp/projects/hVISAclassifier/main_window2.png "hVISAclassifier_main_window3")
+![Alt text](http://yahara.hustle.ne.jp/projects/hVISAclassifier/main_window1_2.png "hVISAclassifier_main_window1_2")
 
 When it finishes running, an output CSV file will be created.  Its name and path will be automatically displayed in the window.
 
