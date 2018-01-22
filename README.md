@@ -4,6 +4,8 @@ This is a graphical program that enables classification between hVISA (defined b
 
 Please download it by pushing "Clone or download" -> "Download ZIP" at the right in this GitHub homepage.
 
+![Alt text](http://yahara.hustle.ne.jp/projects/hVISAclassifier/download_zip.png "download_zip")
+
 After downloading and unzipping in your C drive, please double-click "run.vbs".  The following window will appear in your web-browser.  
 
 According to the texts in the window, please specify 
